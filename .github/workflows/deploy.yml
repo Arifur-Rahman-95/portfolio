@@ -10,28 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Install
-        run: npm install
+      - run: npm install
 
-      - name: Build
-        run: npm run build
+      - run: npm run build
 
-      - name: Deploy to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          security: loose
-          local-dir: ./dist/
-          server-dir: /vue.js.arifurrahmanrasel.top/
+      - name: Deploy with SSH
+        uses: easingthemes/ssh-deploy@v5.1.0
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ftp.arifurrahmanrasel.top
+          REMOTE_USER: arifurra
+          TARGET: /home/arifurra/vue.js.arifurrahmanrasel.top/
+          SOURCE: dist/
