@@ -25,6 +25,6 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ftp.arifurrahmanrasel.top
-          REMOTE_USER: arifurra
+          REMOTE_USER: arifurra@vue.js.arifurrahmanrasel.top
           TARGET: /home/arifurra/vue.js.arifurrahmanrasel.top/
           SOURCE: dist/
